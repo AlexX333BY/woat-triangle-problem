@@ -17,4 +17,6 @@ protected:
     const std::vector<double> m_sides;
 };
 
+wxDEFINE_EVENT(ANALYZE_EVENT, AnalyzeTriangleSidesEvent);
+
 #endif //WOAT_TRIANGLE_PROBLEM_ANALYZETRIANGLESIDESEVENT_H
