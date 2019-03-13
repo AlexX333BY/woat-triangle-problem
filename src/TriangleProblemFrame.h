@@ -6,7 +6,6 @@
 #include <wx/wx.h>
 #endif
 #include <vector>
-#include "AnalyzeTriangleSidesEvent.h"
 
 class TriangleProblemFrame : public wxFrame
 {
@@ -14,7 +13,6 @@ public:
     TriangleProblemFrame(const wxString &title, int gap = 5, int border = 5);
 protected:
     void OnAnalyzeClick(wxCommandEvent &event);
-    void OnAnalyze(AnalyzeTriangleSidesEvent &event);
 
     std::vector<wxTextCtrl *> m_sideSizeFields;
     wxPanel *m_panel;

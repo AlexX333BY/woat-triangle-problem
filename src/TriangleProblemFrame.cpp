@@ -52,9 +52,6 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
                 m_sideSizeFields[side]->GetValue().ToDouble(&value);
                 sides.push_back(value);
             }
-            AnalyzeTriangleSidesEvent event(sides);
-            event.SetEventObject(this);
-            ProcessWindowEvent(event);
         }
         else
         {
