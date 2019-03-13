@@ -1,7 +1,11 @@
 #include "TriangleProblemFrame.h"
 #include "PositiveDoubleValidator.h"
+#include "Triangle.h"
 
 const unsigned char m_sidesCount = 3;
+const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
+    ordinaryMessage = "Triangle is not equilateral nor isosceles", tooLargeSidesMessage = "Triangle sides are too large",
+    notTriangleMessage = "Values specified don't represent triangle";
 
 TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap, const int border)
     : wxFrame(nullptr, wxID_ANY, title), m_sideSizeFields()
@@ -47,10 +51,35 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
         {
             std::vector<double> sides;
             double value;
-            for (unsigned long side = 0; side < m_sideSizeFields.size(); ++side)
+            for (wxTextCtrl *side : m_sideSizeFields)
             {
-                m_sideSizeFields[side]->GetValue().ToDouble(&value);
+                side->GetValue().ToDouble(&value);
                 sides.push_back(value);
+            }
+
+            Triangle triangle;
+            switch (triangle.Initialize(sides))
+            {
+                case SUCCESS:
+                    if (triangle.IsEquilateral())
+                    {
+                        wxMessageBox(equilateralMessage);
+                    }
+                    else if (triangle.IsIsosceles())
+                    {
+                        wxMessageBox(isoscelesMessage);
+                    }
+                    else
+                    {
+                        wxMessageBox(ordinaryMessage);
+                    }
+                    break;
+                case NOT_A_TRIANGLE:
+                    wxMessageBox(notTriangleMessage);
+                    break;
+                case TOO_LARGE_SIDES:
+                    wxMessageBox(tooLargeSidesMessage);
+                    break;
             }
         }
         else

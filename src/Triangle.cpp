@@ -34,7 +34,7 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<double> &sid
                 return TOO_LARGE_SIDES;
             }
 
-            if (tempResult >= sides[sidesSize - i - j])
+            if (tempResult <= sides[sidesSize - i - j])
             {
                 return NOT_A_TRIANGLE;
             }
