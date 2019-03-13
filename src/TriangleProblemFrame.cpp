@@ -1,4 +1,5 @@
 #include "TriangleProblemFrame.h"
+#include "PositiveDoubleValidator.h"
 
 const unsigned char m_sidesCount = 3;
 
@@ -8,7 +9,7 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     const wxString analyzeButtonHint = "Analyze", sideInputHint = "Side #";
     const int rowCount = m_sidesCount, columnCount = 2;
 
-    wxPanel *panel = new wxPanel(this);
+    m_panel = new wxPanel(this);
 
     wxFlexGridSizer *inputSizer = new wxFlexGridSizer(rowCount, columnCount, gap, gap);
     inputSizer->AddGrowableCol(1, 1);
@@ -17,10 +18,10 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     wxBoxSizer *sizer;
     for (unsigned char side = 0; side < m_sidesCount; ++side)
     {
-        textCtrl = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0,
-                wxTextValidator(wxFILTER_EMPTY | wxFILTER_NUMERIC));
+        textCtrl = new wxTextCtrl(m_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0,
+                PositiveDoubleValidator());
         m_sideSizeFields.push_back(textCtrl);
-        inputSizer->Add(new wxStaticText(panel, wxID_ANY, wxString::Format("%s%d", sideInputHint, side + 1)), 0,
+        inputSizer->Add(new wxStaticText(m_panel, wxID_ANY, wxString::Format("%s%d", sideInputHint, side + 1)), 0,
                 wxALIGN_CENTER);
 
         sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -32,6 +33,36 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
 
     wxBoxSizer *panelSizer = new wxBoxSizer(wxVERTICAL);
     panelSizer->Add(inputSizer, 1, wxALL | wxEXPAND, border);
-    panelSizer->Add(new wxButton(panel, wxID_ANY, analyzeButtonHint), 0, wxALL | wxALIGN_CENTER, border);
-    panel->SetSizer(panelSizer);
+    panelSizer->Add(new wxButton(m_panel, m_analyzeButtonId, analyzeButtonHint), 0, wxALL | wxALIGN_CENTER, border);
+    m_panel->SetSizer(panelSizer);
+
+    Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this);
+}
+
+void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
+{
+    if (event.GetId() == m_analyzeButtonId)
+    {
+        if (m_panel->Validate())
+        {
+            std::vector<double> sides;
+            double value;
+            for (unsigned long side = 0; side < m_sideSizeFields.size(); ++side)
+            {
+                m_sideSizeFields[side]->GetValue().ToDouble(&value);
+                sides.push_back(value);
+            }
+            AnalyzeTriangleSidesEvent event(sides);
+            event.SetEventObject(this);
+            ProcessWindowEvent(event);
+        }
+        else
+        {
+            wxMessageBox("Invalid data typed", "Error", wxCENTRE | wxOK | wxICON_ERROR);
+        }
+    }
+    else
+    {
+        event.Skip();
+    }
 }

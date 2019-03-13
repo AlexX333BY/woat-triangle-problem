@@ -13,10 +13,13 @@ class TriangleProblemFrame : public wxFrame
 public:
     TriangleProblemFrame(const wxString &title, int gap = 5, int border = 5);
 protected:
-    void OnAnalyzeTrianlgeClick(wxEvent &event);
+    void OnAnalyzeClick(wxCommandEvent &event);
     void OnAnalyze(AnalyzeTriangleSidesEvent &event);
 
     std::vector<wxTextCtrl *> m_sideSizeFields;
+    wxPanel *m_panel;
+
+    const int m_analyzeButtonId = wxID_OK;
 };
 
 #endif //WOAT_TRIANGLE_PROBLEM_TRIANGLEPROBLEMFRAME_H
