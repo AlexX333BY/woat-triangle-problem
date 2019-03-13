@@ -4,5 +4,5 @@ project(woat_triangle_problem)
 find_package(wxWidgets REQUIRED core base)
 include(${wxWidgets_USE_FILE})
 
-add_executable(woat_triangle_problem src/Main.cpp src/TriangleProblemApp.cpp src/TriangleProblemApp.h src/TriangleProblemFrame.cpp src/TriangleProblemFrame.h src/PositiveDoubleValidator.cpp src/PositiveDoubleValidator.h)
+add_executable(woat_triangle_problem src/Main.cpp src/TriangleProblemApp.cpp src/TriangleProblemApp.h src/TriangleProblemFrame.cpp src/TriangleProblemFrame.h src/PositiveDoubleValidator.cpp src/PositiveDoubleValidator.h src/Triangle.cpp src/Triangle.h)
 target_link_libraries(woat_triangle_problem ${wxWidgets_LIBRARIES})
