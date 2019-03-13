@@ -5,7 +5,7 @@
 const unsigned char m_sidesCount = 3;
 const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
     ordinaryMessage = "Triangle is not equilateral nor isosceles", tooLargeSidesMessage = "Triangle sides are too large",
-    notTriangleMessage = "Values specified don't represent triangle";
+    notTriangleMessage = "Values specified don't represent triangle", invalidDataMessage = "Invalid data typed";
 
 TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap, const int border)
     : wxFrame(nullptr, wxID_ANY, title), m_sideSizeFields()
@@ -75,7 +75,7 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
                     }
                     break;
                 case NOT_A_TRIANGLE:
-                    wxMessageBox(notTriangleMessage);
+                    wxMessageBox(notTriangleMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
                     break;
                 case TOO_LARGE_SIDES:
                     wxMessageBox(tooLargeSidesMessage);
@@ -84,7 +84,7 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
         }
         else
         {
-            wxMessageBox("Invalid data typed", "Error", wxCENTRE | wxOK | wxICON_ERROR);
+            wxMessageBox(invalidDataMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
         }
     }
     else
