@@ -193,3 +193,17 @@ BOOST_AUTO_TEST_CASE(sum_of_two_less_than_third_test)
 
     BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
 }
+
+BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
+{
+    std::vector<double> sides;
+    Triangle triangle;
+
+    sides.push_back(1);
+    sides.push_back(1);
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides.push_back(1);
+    sides.push_back(1);
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+}
