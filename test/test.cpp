@@ -1,11 +1,10 @@
 #define BOOST_TEST_MODULE woat_triangle_problem_test
 #include <boost/test/unit_test.hpp>
 #include "../src/Triangle.h"
-#include <cfloat>
 
 BOOST_AUTO_TEST_CASE(equilateral_test)
 {
-    std::vector<double> sides(3, 3);
+    std::vector<unsigned long long> sides(3, 3);
     Triangle triangle;
     BOOST_TEST_REQUIRE(triangle.Initialize(sides) == SUCCESS);
     BOOST_TEST(triangle.IsEquilateral());
@@ -13,7 +12,7 @@ BOOST_AUTO_TEST_CASE(equilateral_test)
 
 BOOST_AUTO_TEST_CASE(ordinary_test)
 {
-    std::vector<double> sides;
+    std::vector<unsigned long long> sides;
     sides.push_back(2);
     sides.push_back(3);
     sides.push_back(4);
@@ -25,7 +24,7 @@ BOOST_AUTO_TEST_CASE(ordinary_test)
 
 BOOST_AUTO_TEST_CASE(isosceles_test)
 {
-    std::vector<double> sides(3);
+    std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
     sides[0] = 2;
@@ -52,7 +51,7 @@ BOOST_AUTO_TEST_CASE(isosceles_test)
 
 BOOST_AUTO_TEST_CASE(zero_side_test)
 {
-    std::vector<double> sides(3);
+    std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
     sides[0] = 0;
@@ -94,61 +93,13 @@ BOOST_AUTO_TEST_CASE(zero_side_test)
     sides[0] = 0;
     sides[1] = 0;
     sides[2] = 0;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-}
-
-BOOST_AUTO_TEST_CASE(negative_side_test)
-{
-    std::vector<double> sides(3);
-    Triangle triangle;
-
-    sides[0] = -1;
-    sides[1] = 1;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = 1;
-    sides[1] = -1;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = 1;
-    sides[1] = 1;
-    sides[2] = -1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = -1;
-    sides[1] = -1;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = -1;
-    sides[1] = 1;
-    sides[2] = -1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = 1;
-    sides[1] = -1;
-    sides[2] = -1;
-
-    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
-
-    sides[0] = -1;
-    sides[1] = -1;
-    sides[2] = -1;
 
     BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
 }
 
 BOOST_AUTO_TEST_CASE(sum_of_two_equals_third_test)
 {
-    std::vector<double> sides(3);
+    std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
     sides[0] = 1;
@@ -172,7 +123,7 @@ BOOST_AUTO_TEST_CASE(sum_of_two_equals_third_test)
 
 BOOST_AUTO_TEST_CASE(sum_of_two_less_than_third_test)
 {
-    std::vector<double> sides(3);
+    std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
     sides[0] = 1;
@@ -196,7 +147,7 @@ BOOST_AUTO_TEST_CASE(sum_of_two_less_than_third_test)
 
 BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
 {
-    std::vector<double> sides;
+    std::vector<unsigned long long> sides;
     Triangle triangle;
 
     sides.push_back(1);
@@ -210,48 +161,50 @@ BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
 
 BOOST_AUTO_TEST_CASE(too_large_sides_test)
 {
-    std::vector<double> sides(3);
+    unsigned long long maxSide = 18446744073709551615ull;
+
+    std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
-    sides[0] = DBL_MAX;
+    sides[0] = maxSide;
     sides[1] = 1;
     sides[2] = 1;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
     sides[0] = 1;
-    sides[1] = DBL_MAX;
+    sides[1] = maxSide;
     sides[2] = 1;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
     sides[0] = 1;
     sides[1] = 1;
-    sides[2] = DBL_MAX;
+    sides[2] = maxSide;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
-    sides[0] = DBL_MAX;
-    sides[1] = DBL_MAX;
+    sides[0] = maxSide;
+    sides[1] = maxSide;
     sides[2] = 1;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
     sides[0] = 1;
-    sides[1] = DBL_MAX;
-    sides[2] = DBL_MAX;
+    sides[1] = maxSide;
+    sides[2] = maxSide;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
-    sides[0] = DBL_MAX;
+    sides[0] = maxSide;
     sides[1] = 1;
-    sides[2] = DBL_MAX;
+    sides[2] = maxSide;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 
-    sides[0] = DBL_MAX;
-    sides[1] = DBL_MAX;
-    sides[2] = DBL_MAX;
+    sides[0] = maxSide;
+    sides[1] = maxSide;
+    sides[2] = maxSide;
 
-    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 }

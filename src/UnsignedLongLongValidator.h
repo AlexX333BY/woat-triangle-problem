@@ -1,15 +1,15 @@
-#ifndef WOAT_TRIANGLE_PROBLEM_POSITIVEDOUBLEVALIDATOR_H
-#define WOAT_TRIANGLE_PROBLEM_POSITIVEDOUBLEVALIDATOR_H
+#ifndef WOAT_TRIANGLE_PROBLEM_UNSIGNEDLONGLONGVALIDATOR_H
+#define WOAT_TRIANGLE_PROBLEM_UNSIGNEDLONGLONGVALIDATOR_H
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
 
-class PositiveDoubleValidator : public wxValidator
+class UnsignedLongLongValidator : public wxValidator
 {
 public:
-    PositiveDoubleValidator();
+    UnsignedLongLongValidator();
     virtual bool Validate(wxWindow *parent);
     virtual wxObject* Clone() const;
     virtual bool TransferFromWindow();
@@ -18,4 +18,4 @@ protected:
     wxString m_data;
 };
 
-#endif //WOAT_TRIANGLE_PROBLEM_POSITIVEDOUBLEVALIDATOR_H
+#endif //WOAT_TRIANGLE_PROBLEM_UNSIGNEDLONGLONGVALIDATOR_H
