@@ -26,10 +26,10 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<double> &sid
     {
         for (unsigned long j = i + 1; j < sidesSize; ++j)
         {
-            std::feclearexcept(FE_UNDERFLOW);
+            std::feclearexcept(FE_OVERFLOW);
             tempResult = sides[i] + sides[j];
 
-            if (std::fetestexcept(FE_UNDERFLOW))
+            if (std::fetestexcept(FE_OVERFLOW))
             {
                 return TOO_LARGE_SIDES;
             }
