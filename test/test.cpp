@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE woat_triangle_problem_test
 #include <boost/test/unit_test.hpp>
 #include "../src/Triangle.h"
-#include <float.h>
+#include <cfloat>
 
 BOOST_AUTO_TEST_CASE(equilateral_test)
 {
@@ -206,4 +206,52 @@ BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
     sides.push_back(1);
     sides.push_back(1);
     BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+}
+
+BOOST_AUTO_TEST_CASE(too_large_sides_test)
+{
+    std::vector<double> sides(3);
+    Triangle triangle;
+
+    sides[0] = DBL_MAX;
+    sides[1] = 1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = 1;
+    sides[1] = DBL_MAX;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = 1;
+    sides[1] = 1;
+    sides[2] = DBL_MAX;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = DBL_MAX;
+    sides[1] = DBL_MAX;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = 1;
+    sides[1] = DBL_MAX;
+    sides[2] = DBL_MAX;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = DBL_MAX;
+    sides[1] = 1;
+    sides[2] = DBL_MAX;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
+
+    sides[0] = DBL_MAX;
+    sides[1] = DBL_MAX;
+    sides[2] = DBL_MAX;
+
+    BOOST_TEST(triangle.Initialize(sides) == TOO_LARGE_SIDES);
 }
