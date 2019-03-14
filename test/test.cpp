@@ -49,3 +49,51 @@ BOOST_AUTO_TEST_CASE(isosceles_test)
     BOOST_TEST_REQUIRE(triangle.Initialize(sides) == SUCCESS);
     BOOST_TEST(triangle.IsIsosceles());
 }
+
+BOOST_AUTO_TEST_CASE(zero_side_test)
+{
+    std::vector<double> sides(3);
+    Triangle triangle;
+
+    sides[0] = 0;
+    sides[1] = 1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = 0;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = 1;
+    sides[2] = 0;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 0;
+    sides[1] = 0;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 0;
+    sides[1] = 1;
+    sides[2] = 0;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = 0;
+    sides[2] = 0;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 0;
+    sides[1] = 0;
+    sides[2] = 0;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+}
