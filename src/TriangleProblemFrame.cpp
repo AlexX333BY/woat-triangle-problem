@@ -49,11 +49,11 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
     {
         if (m_panel->Validate())
         {
-            std::vector<double> sides;
-            double value;
+            std::vector<unsigned long long> sides;
+            unsigned long long value;
             for (wxTextCtrl *side : m_sideSizeFields)
             {
-                side->GetValue().ToDouble(&value);
+                side->GetValue().ToULongLong(&value, 10);
                 sides.push_back(value);
             }
 
