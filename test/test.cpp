@@ -97,3 +97,51 @@ BOOST_AUTO_TEST_CASE(zero_side_test)
 
     BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
 }
+
+BOOST_AUTO_TEST_CASE(negative_side_test)
+{
+    std::vector<double> sides(3);
+    Triangle triangle;
+
+    sides[0] = -1;
+    sides[1] = 1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = -1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = 1;
+    sides[2] = -1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = -1;
+    sides[1] = -1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = -1;
+    sides[1] = 1;
+    sides[2] = -1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = 1;
+    sides[1] = -1;
+    sides[2] = -1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+
+    sides[0] = -1;
+    sides[1] = -1;
+    sides[2] = -1;
+
+    BOOST_TEST(triangle.Initialize(sides) == NOT_A_TRIANGLE);
+}
