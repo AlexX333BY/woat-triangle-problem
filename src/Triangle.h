@@ -14,13 +14,13 @@ class Triangle
 {
 public:
     Triangle();
-    TriangleInitializationResult Initialize(const std::vector<double> &sides);
+    TriangleInitializationResult Initialize(const std::vector<unsigned long long> &sides);
     bool IsIsosceles();
     bool IsEquilateral();
     bool IsInitialized();
 protected:
     bool m_isInitialized;
-    double a, b, c;
+    unsigned long long a, b, c;
 };
 
 #endif //WOAT_TRIANGLE_PROBLEM_TRIANGLE_H

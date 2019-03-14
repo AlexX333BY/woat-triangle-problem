@@ -1,10 +1,9 @@
 #include "Triangle.h"
-#include <cfenv>
 
 Triangle::Triangle() : m_isInitialized(false)
 { }
 
-TriangleInitializationResult Triangle::Initialize(const std::vector<double> &sides)
+TriangleInitializationResult Triangle::Initialize(const std::vector<unsigned long long> &sides)
 {
     const unsigned long sidesSize = sides.size();
     m_isInitialized = false;
@@ -13,7 +12,7 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<double> &sid
         return NOT_A_TRIANGLE;
     }
 
-    for (const double &side : sides)
+    for (const unsigned long long &side : sides)
     {
         if (side <= 0)
         {
@@ -21,15 +20,14 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<double> &sid
         }
     }
 
-    double tempResult;
+    long long tempResult;
     for (unsigned long i = 0; i < sidesSize; ++i)
     {
         for (unsigned long j = i + 1; j < sidesSize; ++j)
         {
-            std::feclearexcept(FE_OVERFLOW);
             tempResult = sides[i] + sides[j];
 
-            if (std::fetestexcept(FE_OVERFLOW))
+            if (tempResult <= 0)
             {
                 return TOO_LARGE_SIDES;
             }
