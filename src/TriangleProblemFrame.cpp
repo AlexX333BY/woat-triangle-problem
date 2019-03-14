@@ -1,5 +1,5 @@
 #include "TriangleProblemFrame.h"
-#include "PositiveDoubleValidator.h"
+#include "UnsignedLongLongValidator.h"
 #include "Triangle.h"
 
 const unsigned char m_sidesCount = 3;
@@ -23,7 +23,7 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     for (unsigned char side = 0; side < m_sidesCount; ++side)
     {
         textCtrl = new wxTextCtrl(m_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0,
-                PositiveDoubleValidator());
+                UnsignedLongLongValidator());
         m_sideSizeFields.push_back(textCtrl);
         inputSizer->Add(new wxStaticText(m_panel, wxID_ANY, wxString::Format("%s%d", sideInputHint, side + 1)), 0,
                 wxALIGN_CENTER);

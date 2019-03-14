@@ -1,15 +1,15 @@
-#include "PositiveDoubleValidator.h"
+#include "UnsignedLongLongValidator.h"
 
-PositiveDoubleValidator::PositiveDoubleValidator() : wxValidator(), m_data()
+UnsignedLongLongValidator::UnsignedLongLongValidator() : wxValidator(), m_data()
 { }
 
-bool PositiveDoubleValidator::Validate(wxWindow *)
+bool UnsignedLongLongValidator::Validate(wxWindow *)
 {
     wxWindow *window = GetWindow();
     if (window->IsKindOf(CLASSINFO(wxTextCtrl)))
     {
-        double value;
-        return ((wxTextCtrl *)window)->GetValue().ToDouble(&value) && (value > 0);
+        unsigned long long value;
+        return ((wxTextCtrl *)window)->GetValue().ToULongLong(&value) && (value > 0);
     }
     else
     {
@@ -17,12 +17,12 @@ bool PositiveDoubleValidator::Validate(wxWindow *)
     }
 }
 
-wxObject* PositiveDoubleValidator::Clone() const
+wxObject* UnsignedLongLongValidator::Clone() const
 {
-    return new PositiveDoubleValidator(*this);
+    return new UnsignedLongLongValidator(*this);
 }
 
-bool PositiveDoubleValidator::TransferFromWindow()
+bool UnsignedLongLongValidator::TransferFromWindow()
 {
     wxWindow *window = GetWindow();
     if (window->IsKindOf(CLASSINFO(wxTextCtrl)))
@@ -36,7 +36,7 @@ bool PositiveDoubleValidator::TransferFromWindow()
     }
 }
 
-bool PositiveDoubleValidator::TransferToWindow()
+bool UnsignedLongLongValidator::TransferToWindow()
 {
     wxWindow *window = GetWindow();
     if (window->IsKindOf(CLASSINFO(wxTextCtrl)))

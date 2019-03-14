@@ -6,10 +6,10 @@
 #include <wx/wx.h>
 #endif
 
-class PositiveDoubleValidator : public wxValidator
+class UnsignedLongLongValidator : public wxValidator
 {
 public:
-    PositiveDoubleValidator();
+    UnsignedLongLongValidator();
     virtual bool Validate(wxWindow *parent);
     virtual wxObject* Clone() const;
     virtual bool TransferFromWindow();
