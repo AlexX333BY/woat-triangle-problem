@@ -4,7 +4,7 @@
 
 const unsigned char m_sidesCount = 3;
 const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
-    ordinaryMessage = "Triangle is not equilateral nor isosceles", tooLargeSidesMessage = "Triangle sides are too large",
+    ordinaryMessage = "Triangle is scalene", tooLargeSidesMessage = "Triangle sides are too large",
     notTriangleMessage = "Values specified don't represent triangle", invalidDataMessage = "Invalid data typed";
 
 TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap, const int border)
