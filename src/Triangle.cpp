@@ -38,9 +38,9 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<unsigned lon
         }
     }
 
-    a = sides[0];
-    b = sides[1];
-    c = sides[2];
+    m_a = sides[0];
+    m_b = sides[1];
+    m_c = sides[2];
     m_isInitialized = true;
 
     return SUCCESS;
@@ -53,10 +53,10 @@ bool Triangle::IsInitialized()
 
 bool Triangle::IsEquilateral()
 {
-    return m_isInitialized && (a == b) && (a == c);
+    return m_isInitialized && (m_a == m_b) && (m_a == m_c);
 }
 
 bool Triangle::IsIsosceles()
 {
-    return m_isInitialized && ((a == b) || (a == c) || (b == c));
+    return m_isInitialized && ((m_a == m_b) || (m_a == m_c) || (m_b == m_c));
 }

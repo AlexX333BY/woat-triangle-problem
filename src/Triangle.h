@@ -20,7 +20,7 @@ public:
     bool IsInitialized();
 protected:
     bool m_isInitialized;
-    unsigned long long a, b, c;
+    unsigned long long m_a, m_b, m_c;
 };
 
 #endif //WOAT_TRIANGLE_PROBLEM_TRIANGLE_H
