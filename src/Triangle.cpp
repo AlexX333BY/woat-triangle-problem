@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <climits>
 #include "Triangle.h"
 
 Triangle::Triangle() : m_isInitialized(false)
@@ -21,19 +22,16 @@ TriangleInitializationResult Triangle::Initialize(const std::vector<unsigned lon
         }
     }
 
-    long long tempResult;
-    for (unsigned long i = 0; i < sidesSize; ++i)
+    for (size_t i = 0; i < sidesSize; ++i)
     {
-        for (unsigned long j = i + 1; j < sidesSize; ++j)
+        for (size_t j = i + 1; j < sidesSize; ++j)
         {
-            tempResult = sides[i] + sides[j];
-
-            if (tempResult <= 0)
+            if (sides[i] > ULLONG_MAX - sides[j])
             {
                 return TOO_LARGE_SIDES;
             }
 
-            if (tempResult <= sides[sidesSize - i - j])
+            if ((sides[i] + sides[j]) <= sides[sidesSize - i - j])
             {
                 return NOT_A_TRIANGLE;
             }
