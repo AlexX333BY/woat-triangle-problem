@@ -1,3 +1,4 @@
+#include <cstddef>
 #include "Triangle.h"
 
 Triangle::Triangle() : m_isInitialized(false)
@@ -5,7 +6,7 @@ Triangle::Triangle() : m_isInitialized(false)
 
 TriangleInitializationResult Triangle::Initialize(const std::vector<unsigned long long> &sides)
 {
-    const unsigned long sidesSize = sides.size();
+    const size_t sidesSize = sides.size();
     m_isInitialized = false;
     if (sidesSize != 3)
     {
