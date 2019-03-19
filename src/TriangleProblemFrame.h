@@ -13,6 +13,7 @@ public:
     TriangleProblemFrame(const wxString &title, int gap = 5, int border = 5);
 protected:
     void OnAnalyzeClick(wxCommandEvent &event);
+    void OnExit(wxEvent &event);
 
     std::vector<wxTextCtrl *> m_sideSizeFields;
     wxPanel *m_panel;

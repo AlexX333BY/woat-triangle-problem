@@ -54,6 +54,7 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
 
     SetMenuBar(menuBar);
     Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this);
+    Bind(wxEVT_MENU, &TriangleProblemFrame::OnExit, this, wxID_EXIT);
 }
 
 void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
@@ -104,4 +105,9 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
     {
         event.Skip();
     }
+}
+
+void TriangleProblemFrame::OnExit(wxEvent &event)
+{
+    Close();
 }
