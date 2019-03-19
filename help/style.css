@@ -1,0 +1,23 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 2em;
+}
+
+h1, h2 {
+    color: #0088cc;
+}
+
+div.outer-container {
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 64em;
+    text-align: center;
+    background-color: #f0f6fa;
+    padding: 2em;
+    border-radius: 2em;
+}
+
+div.inner-container {
+    text-align: left;
+}

@@ -1,6 +1,7 @@
 #include "TriangleProblemFrame.h"
 #include "UnsignedLongLongValidator.h"
 #include "Triangle.h"
+#include <wx/filename.h>
 
 const unsigned char m_sidesCount = 3;
 const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
@@ -55,6 +56,7 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     SetMenuBar(menuBar);
     Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this);
     Bind(wxEVT_MENU, &TriangleProblemFrame::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &TriangleProblemFrame::OnHelp, this, wxID_HELP);
 }
 
 void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
@@ -107,7 +109,14 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
     }
 }
 
-void TriangleProblemFrame::OnExit(wxEvent &event)
+void TriangleProblemFrame::OnExit(wxEvent &)
 {
     Close();
+}
+
+void TriangleProblemFrame::OnHelp(wxEvent &)
+{
+    wxFileName name("../help/help.html");
+    name.Normalize();
+    wxLaunchDefaultBrowser(name.GetFullPath());
 }
