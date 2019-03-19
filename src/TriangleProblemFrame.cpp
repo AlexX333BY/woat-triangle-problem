@@ -40,6 +40,19 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     panelSizer->Add(new wxButton(m_panel, m_analyzeButtonId, analyzeButtonHint), 0, wxALL | wxALIGN_CENTER, border);
     m_panel->SetSizer(panelSizer);
 
+    wxMenuBar *menuBar = new wxMenuBar();
+    wxMenu *menu;
+
+    menu = new wxMenu();
+    menu->Append(wxID_EXIT, "Exit");
+    menuBar->Append(menu, "File");
+
+    menu = new wxMenu();
+    menu->Append(wxID_HELP, "Help");
+    menu->Append(wxID_ABOUT, "About");
+    menuBar->Append(menu, "About");
+
+    SetMenuBar(menuBar);
     Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this);
 }
 
