@@ -54,58 +54,51 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     menuBar->Append(menu, "About");
 
     SetMenuBar(menuBar);
-    Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this);
+    Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this, m_analyzeButtonId);
     Bind(wxEVT_MENU, &TriangleProblemFrame::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &TriangleProblemFrame::OnHelp, this, wxID_HELP);
 }
 
 void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
 {
-    if (event.GetId() == m_analyzeButtonId)
+    if (m_panel->Validate())
     {
-        if (m_panel->Validate())
+        std::vector<unsigned long long> sides;
+        unsigned long long value;
+        for (wxTextCtrl *side : m_sideSizeFields)
         {
-            std::vector<unsigned long long> sides;
-            unsigned long long value;
-            for (wxTextCtrl *side : m_sideSizeFields)
-            {
-                side->GetValue().ToULongLong(&value, 10);
-                sides.push_back(value);
-            }
-
-            Triangle triangle;
-            switch (triangle.Initialize(sides))
-            {
-                case SUCCESS:
-                    if (triangle.IsEquilateral())
-                    {
-                        wxMessageBox(equilateralMessage);
-                    }
-                    else if (triangle.IsIsosceles())
-                    {
-                        wxMessageBox(isoscelesMessage);
-                    }
-                    else
-                    {
-                        wxMessageBox(ordinaryMessage);
-                    }
-                    break;
-                case NOT_A_TRIANGLE:
-                    wxMessageBox(notTriangleMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
-                    break;
-                case TOO_LARGE_SIDES:
-                    wxMessageBox(tooLargeSidesMessage);
-                    break;
-            }
+            side->GetValue().ToULongLong(&value, 10);
+            sides.push_back(value);
         }
-        else
+
+        Triangle triangle;
+        switch (triangle.Initialize(sides))
         {
-            wxMessageBox(invalidDataMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
+            case SUCCESS:
+                if (triangle.IsEquilateral())
+                {
+                    wxMessageBox(equilateralMessage);
+                }
+                else if (triangle.IsIsosceles())
+                {
+                    wxMessageBox(isoscelesMessage);
+                }
+                else
+                {
+                    wxMessageBox(ordinaryMessage);
+                }
+                break;
+            case NOT_A_TRIANGLE:
+                wxMessageBox(notTriangleMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
+                break;
+            case TOO_LARGE_SIDES:
+                wxMessageBox(tooLargeSidesMessage);
+                break;
         }
     }
     else
     {
-        event.Skip();
+        wxMessageBox(invalidDataMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
     }
 }
 
