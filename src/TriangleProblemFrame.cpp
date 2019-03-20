@@ -2,6 +2,7 @@
 #include "UnsignedLongLongValidator.h"
 #include "Triangle.h"
 #include <wx/filename.h>
+#include <wx/aboutdlg.h>
 
 const unsigned char m_sidesCount = 3;
 const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
@@ -57,9 +58,10 @@ TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap,
     Bind(wxEVT_BUTTON, &TriangleProblemFrame::OnAnalyzeClick, this, m_analyzeButtonId);
     Bind(wxEVT_MENU, &TriangleProblemFrame::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &TriangleProblemFrame::OnHelp, this, wxID_HELP);
+    Bind(wxEVT_MENU, &TriangleProblemFrame::OnAbout, this, wxID_ABOUT);
 }
 
-void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &event)
+void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &)
 {
     if (m_panel->Validate())
     {
@@ -112,4 +114,15 @@ void TriangleProblemFrame::OnHelp(wxEvent &)
     wxFileName name("../help/help.html");
     name.Normalize();
     wxLaunchDefaultBrowser(name.GetFullPath());
+}
+
+void TriangleProblemFrame::OnAbout(wxEvent &)
+{
+    wxAboutDialogInfo aboutInfo;
+    aboutInfo.SetName("Triangle Problem app");
+    aboutInfo.SetDescription("Program that should help to solve triangle problem");
+    aboutInfo.SetCopyright("(C) 2019");
+    aboutInfo.SetWebSite("https://github.com/AlexX333BY/woat-triangle-problem");
+    aboutInfo.AddDeveloper("Aliaksei Kaziukovich");
+    wxAboutBox(aboutInfo, this);
 }

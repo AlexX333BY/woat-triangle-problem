@@ -15,6 +15,7 @@ protected:
     void OnAnalyzeClick(wxCommandEvent &event);
     void OnExit(wxEvent &event);
     void OnHelp(wxEvent &event);
+    void OnAbout(wxEvent &event);
 
     std::vector<wxTextCtrl *> m_sideSizeFields;
     wxPanel *m_panel;
