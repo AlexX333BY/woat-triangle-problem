@@ -107,7 +107,7 @@ void TriangleProblemFrame::OnAbout(wxEvent &)
 
     aboutInfo.SetName("Triangle Problem app");
     aboutInfo.SetDescription("Program that should help to solve triangle problem");
-    aboutInfo.SetCopyright("(C) 2019");
+    aboutInfo.SetCopyright(wxString::Format("(C) %s 2019", authorName));
     aboutInfo.SetWebSite("https://github.com/AlexX333BY/woat-triangle-problem");
 
     aboutInfo.AddDeveloper(authorName);
