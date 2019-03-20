@@ -5,12 +5,9 @@
 #include <wx/aboutdlg.h>
 
 const unsigned char m_sidesCount = 3;
-const wxString equilateralMessage = "Triangle is equilateral", isoscelesMessage = "Triangle is isosceles",
-    ordinaryMessage = "Triangle is scalene", tooLargeSidesMessage = "Triangle sides are too large",
-    notTriangleMessage = "Values specified don't represent triangle", invalidDataMessage = "Invalid data typed";
 
 TriangleProblemFrame::TriangleProblemFrame(const wxString &title, const int gap, const int border)
-    : wxFrame(nullptr, wxID_ANY, title), m_sideSizeFields()
+    : wxFrame(nullptr, wxID_ANY, title), m_sideSizeFields(), m_provider()
 {
     const wxString analyzeButtonHint = "Analyze", sideInputHint = "Side #";
     const int rowCount = m_sidesCount, columnCount = 2;
@@ -74,33 +71,21 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &)
         }
 
         Triangle triangle;
-        switch (triangle.Initialize(sides))
+        TriangleInitializationResult result = triangle.Initialize(sides);
+        switch (result)
         {
             case SUCCESS:
-                if (triangle.IsEquilateral())
-                {
-                    wxMessageBox(equilateralMessage);
-                }
-                else if (triangle.IsIsosceles())
-                {
-                    wxMessageBox(isoscelesMessage);
-                }
-                else
-                {
-                    wxMessageBox(ordinaryMessage);
-                }
+                wxMessageBox(m_provider.GetTriangleTypeMessage(triangle.GetType()));
                 break;
-            case NOT_A_TRIANGLE:
-                wxMessageBox(notTriangleMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
-                break;
-            case TOO_LARGE_SIDES:
-                wxMessageBox(tooLargeSidesMessage);
+            default:
+                wxMessageBox(m_provider.GetInitializationResultMessage(result), wxMessageBoxCaptionStr,
+                        wxCENTRE | wxOK | wxICON_ERROR);
                 break;
         }
     }
     else
     {
-        wxMessageBox(invalidDataMessage, wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
+        wxMessageBox(m_provider.GetInvalidDataMessage(), wxMessageBoxCaptionStr, wxCENTRE | wxOK | wxICON_ERROR);
     }
 }
 

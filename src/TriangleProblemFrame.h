@@ -6,6 +6,7 @@
 #include <wx/wx.h>
 #endif
 #include <vector>
+#include "MessageProvider.h"
 
 class TriangleProblemFrame : public wxFrame
 {
@@ -19,6 +20,7 @@ protected:
 
     std::vector<wxTextCtrl *> m_sideSizeFields;
     wxPanel *m_panel;
+    MessageProvider m_provider;
 
     const int m_analyzeButtonId = wxID_OK;
 };
