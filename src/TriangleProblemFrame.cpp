@@ -72,15 +72,14 @@ void TriangleProblemFrame::OnAnalyzeClick(wxCommandEvent &)
 
         Triangle triangle;
         TriangleInitializationResult result = triangle.Initialize(sides);
-        switch (result)
+        if (result == SUCCESS)
         {
-            case SUCCESS:
-                wxMessageBox(m_provider.GetTriangleTypeMessage(triangle.GetType()));
-                break;
-            default:
-                wxMessageBox(m_provider.GetInitializationResultMessage(result), wxMessageBoxCaptionStr,
-                        wxCENTRE | wxOK | wxICON_ERROR);
-                break;
+            wxMessageBox(m_provider.GetTriangleTypeMessage(triangle.GetType()));
+        }
+        else
+        {
+            wxMessageBox(m_provider.GetInitializationResultMessage(result), wxMessageBoxCaptionStr,
+                    wxCENTRE | wxOK | wxICON_ERROR);
         }
     }
     else
