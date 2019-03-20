@@ -10,6 +10,13 @@ enum TriangleInitializationResult
     TOO_LARGE_SIDES
 };
 
+enum TriangleType
+{
+    SCALENE,
+    ISOSCELES,
+    EQUILATERAL
+};
+
 class Triangle
 {
 public:
@@ -18,6 +25,7 @@ public:
     bool IsIsosceles();
     bool IsEquilateral();
     bool IsInitialized();
+    TriangleType GetType();
 protected:
     bool m_isInitialized;
     unsigned long long m_a, m_b, m_c;

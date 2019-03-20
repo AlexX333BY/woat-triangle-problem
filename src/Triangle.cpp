@@ -1,6 +1,7 @@
 #include <cstddef>
 #include <climits>
 #include "Triangle.h"
+#include <stdexcept>
 
 Triangle::Triangle() : m_isInitialized(false)
 { }
@@ -59,4 +60,25 @@ bool Triangle::IsEquilateral()
 bool Triangle::IsIsosceles()
 {
     return m_isInitialized && ((m_a == m_b) || (m_a == m_c) || (m_b == m_c));
+}
+
+TriangleType Triangle::GetType()
+{
+    if (!m_isInitialized)
+    {
+        throw std::logic_error("m_isInitialized");
+    }
+
+    if (IsEquilateral())
+    {
+        return EQUILATERAL;
+    }
+    else if (IsIsosceles())
+    {
+        return ISOSCELES;
+    }
+    else
+    {
+        return SCALENE;
+    }
 }
