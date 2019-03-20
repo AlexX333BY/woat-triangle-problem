@@ -103,10 +103,17 @@ void TriangleProblemFrame::OnHelp(wxEvent &)
 void TriangleProblemFrame::OnAbout(wxEvent &)
 {
     wxAboutDialogInfo aboutInfo;
+    wxString authorName = "Aliaksei Kaziukovich";
+
     aboutInfo.SetName("Triangle Problem app");
     aboutInfo.SetDescription("Program that should help to solve triangle problem");
     aboutInfo.SetCopyright("(C) 2019");
     aboutInfo.SetWebSite("https://github.com/AlexX333BY/woat-triangle-problem");
-    aboutInfo.AddDeveloper("Aliaksei Kaziukovich");
+
+    aboutInfo.AddDeveloper(authorName);
+    aboutInfo.AddArtist(authorName);
+    aboutInfo.AddDocWriter(authorName);
+    aboutInfo.AddTranslator(authorName);
+
     wxAboutBox(aboutInfo, this);
 }
