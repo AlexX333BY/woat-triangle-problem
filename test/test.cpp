@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
 
 BOOST_AUTO_TEST_CASE(too_large_sides_test)
 {
-    unsigned long long maxSide = 18446744073709551615ull;
+    unsigned long long maxSide = (unsigned long long)0 - 1;
 
     std::vector<unsigned long long> sides(3);
     Triangle triangle;
