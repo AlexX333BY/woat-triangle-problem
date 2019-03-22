@@ -1,8 +1,8 @@
 #include "MessageProvider.h"
 
 MessageProvider::MessageProvider() : m_typeMessages(), m_resultMessages(),
-    m_invalidDataMessage(wxT("Invalid data typed. Triangle sides should be positive integral number not larger than "
-                             "2^64 – 1."))
+    m_invalidDataMessage(wxT("Invalid data typed. Triangle sides sizes should be integral numbers in interval from 1 to "
+                             "2^64 - 1."))
 {
     m_typeMessages[SCALENE] = wxT("Triangle is scalene.");
     m_typeMessages[ISOSCELES] = wxT("Triangle is isosceles.");
@@ -11,8 +11,8 @@ MessageProvider::MessageProvider() : m_typeMessages(), m_resultMessages(),
     m_resultMessages[SUCCESS] = wxT("Successfully initialized.");
     m_resultMessages[NOT_A_TRIANGLE] = wxT("Values specified don't represent triangle. They should satisfy the rule: "
                                            "sum of two side's lengths should exceed third side's length.");
-    m_resultMessages[TOO_LARGE_SIDES] = wxT("Triangle sides are too large. Sum of any two sides shouldn't exceed "
-                                            "2^64 – 1.");
+    m_resultMessages[TOO_LARGE_SIDES] = wxT("Triangle sides are too large. Sum of any two sides sizes should be in "
+                                            "interval from 2 to 2^64 – 1.");
 }
 
 const wxString& MessageProvider::GetInitializationResultMessage(TriangleInitializationResult result)
