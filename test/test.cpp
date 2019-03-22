@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(wrong_sides_count_test)
 
 BOOST_AUTO_TEST_CASE(too_large_sides_test)
 {
-    unsigned long long maxSide = (unsigned long long)0 - 1;
+    unsigned long long maxSide = (unsigned long long)0 - 1, halfMaxSide = maxSide / 2;
 
     std::vector<unsigned long long> sides(3);
     Triangle triangle;
@@ -205,6 +205,60 @@ BOOST_AUTO_TEST_CASE(too_large_sides_test)
     sides[0] = maxSide;
     sides[1] = maxSide;
     sides[2] = maxSide;
+
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
+
+    sides[0] = 1;
+    sides[1] = 1;
+    sides[2] = 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
+
+    sides[0] = halfMaxSide;
+    sides[1] = halfMaxSide;
+    sides[2] = halfMaxSide;
+
+    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
+
+    sides[0] = halfMaxSide + 1;
+    sides[1] = halfMaxSide;
+    sides[2] = halfMaxSide;
+
+    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
+
+    sides[0] = halfMaxSide;
+    sides[1] = halfMaxSide + 1;
+    sides[2] = halfMaxSide;
+
+    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
+
+    sides[0] = halfMaxSide;
+    sides[1] = halfMaxSide;
+    sides[2] = halfMaxSide + 1;
+
+    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
+
+    sides[0] = halfMaxSide + 1;
+    sides[1] = halfMaxSide + 1;
+    sides[2] = halfMaxSide;
+
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
+
+    sides[0] = halfMaxSide + 1;
+    sides[1] = halfMaxSide;
+    sides[2] = halfMaxSide + 1;
+
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
+
+    sides[0] = halfMaxSide;
+    sides[1] = halfMaxSide + 1;
+    sides[2] = halfMaxSide + 1;
+
+    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
+
+    sides[0] = halfMaxSide + 1;
+    sides[1] = halfMaxSide + 1;
+    sides[2] = halfMaxSide + 1;
 
     BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
 }
