@@ -3,5 +3,5 @@
 
 bool TriangleProblemApp::OnInit()
 {
-    return (new TriangleProblemFrame("Triangle problem solver"))->Show(true);
+    return (new TriangleProblemFrame("Triangle Problem solver"))->Show(true);
 }
