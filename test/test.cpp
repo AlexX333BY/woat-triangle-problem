@@ -166,54 +166,6 @@ BOOST_AUTO_TEST_CASE(too_large_sides_test)
     std::vector<unsigned long long> sides(3);
     Triangle triangle;
 
-    sides[0] = maxSide;
-    sides[1] = 1;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = 1;
-    sides[1] = maxSide;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = 1;
-    sides[1] = 1;
-    sides[2] = maxSide;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = maxSide;
-    sides[1] = maxSide;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = 1;
-    sides[1] = maxSide;
-    sides[2] = maxSide;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = maxSide;
-    sides[1] = 1;
-    sides[2] = maxSide;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = maxSide;
-    sides[1] = maxSide;
-    sides[2] = maxSide;
-
-    BOOST_TEST(triangle.Initialize(sides) != SUCCESS);
-
-    sides[0] = 1;
-    sides[1] = 1;
-    sides[2] = 1;
-
-    BOOST_TEST(triangle.Initialize(sides) == SUCCESS);
-
     sides[0] = halfMaxSide;
     sides[1] = halfMaxSide;
     sides[2] = halfMaxSide;
